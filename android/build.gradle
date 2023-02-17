@@ -44,3 +44,7 @@ android {
         minSdkVersion 16
     }
 }
+
+dependencies {
+    implementation files('lib/SYD-SmartPOS-SDK-V1.09.jar')
+}
