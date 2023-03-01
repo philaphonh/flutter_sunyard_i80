@@ -15,10 +15,13 @@ class FlutterSunyardI80Plugin: FlutterPlugin {
   private val printerChannelName: String = "printer"
 
   override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
-    DeviceMaster.getInstance().init(flutterPluginBinding.applicationContext)
+    val isDeviceAvailable = System.getProperty("http.agent").contains("i80")
+    if (isDeviceAvailable) {
+      DeviceMaster.getInstance().init(flutterPluginBinding.applicationContext)
 
-    printerChannel = MethodChannel(flutterPluginBinding.binaryMessenger, printerChannelName)
-    printerChannel.setMethodCallHandler(PrinterMethodCallHandler(PrinterModule(flutterPluginBinding.applicationContext)))
+      printerChannel = MethodChannel(flutterPluginBinding.binaryMessenger, printerChannelName)
+      printerChannel.setMethodCallHandler(PrinterMethodCallHandler(PrinterModule(flutterPluginBinding.applicationContext)))
+    }
   }
 
   override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
