@@ -16,7 +16,7 @@ class PrinterMethodCallHandler: MethodCallHandler {
 
     override fun onMethodCall(call: MethodCall, result: MethodChannel.Result) {
         when (call.method) {
-            printerModule.havePrinterMethodString -> result.success(printerModule.havePrinter())
+            printerModule.isPrinterAvailableMethodString -> result.success(printerModule.isPrinterAvailable())
             printerModule.appendTextMethodString -> {
                 val text = call.argument<String>("text")
                 val isBoldFont = call.argument<Boolean>("isBoldFont")

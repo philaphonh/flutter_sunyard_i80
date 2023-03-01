@@ -12,7 +12,7 @@ class Printer {
 
   static const String _methodChannelName = "printer";
 
-  static const String _havePrinterMethodString = "havePrinter";
+  static const String _isPrinterAvailableMethodString = "isPrinterAvailable";
 
   static const String _appendTextMethodString = "appendText";
 
@@ -30,9 +30,15 @@ class Printer {
 
   static const String _startPrintMethodString = "startPrint";
 
-  /// Check if the printer is available.
-  static Future<bool?> havePrinter() async {
-    return await _methodChannel.invokeMethod(_havePrinterMethodString);
+  /// Whether the printer is available or not.
+  static Future<bool> isPrinterAvailable() async {
+    final isTrue =
+        await _methodChannel.invokeMethod(_isPrinterAvailableMethodString);
+    if (isTrue) {
+      return true;
+    }
+
+    return false;
   }
 
   /// Appends [text] data to print buffer.

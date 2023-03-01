@@ -6,9 +6,7 @@ import android.graphics.BitmapFactory
 import com.socsi.exception.SDKException
 import com.socsi.smartposapi.printer.Align
 import com.socsi.smartposapi.printer.FontLattice
-import com.socsi.smartposapi.printer.PrintRespCode
 import com.socsi.smartposapi.printer.Printer2
-import com.socsi.smartposapi.printer.Printer2.PrintBuff
 import com.socsi.smartposapi.printer.TextEntity
 
 /** A module to utilize printer functionality. */
@@ -16,8 +14,8 @@ class PrinterModule {
     /** An instance of [Printer2] */
     private lateinit var printerInstance: Printer2
 
-    /** Method string of [havePrinter]. */
-    public val havePrinterMethodString: String = "havePrinter"
+    /** Method string of [isPrinterAvailable]. */
+    public val isPrinterAvailableMethodString: String = "isPrinterAvailable"
 
     /** Method string of [appendText] */
     public val appendTextMethodString: String = "appendText"
@@ -47,15 +45,15 @@ class PrinterModule {
         printerInstance = Printer2.getInstance(context)
     }
 
-    /** Check if printer is available. */
-    fun havePrinter(): Boolean {
-        var havePrinter = false
+    /** Whether printer is available or not. */
+    fun isPrinterAvailable(): Boolean {
+        var isAvailable = false
         try {
-            havePrinter = printerInstance.havePrinter()
+            isAvailable = printerInstance.havePrinter()
         } catch (e: SDKException) {
             e.printStackTrace()
         }
-        return havePrinter
+        return isAvailable
     }
 
     /** Append text entity to print buffer. */
