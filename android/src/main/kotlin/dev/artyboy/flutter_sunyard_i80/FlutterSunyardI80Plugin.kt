@@ -1,6 +1,5 @@
 package dev.artyboy.flutter_sunyard_i80
 
-import androidx.annotation.NonNull
 import com.socsi.smartposapi.DeviceMaster
 
 import io.flutter.embedding.engine.plugins.FlutterPlugin
@@ -14,7 +13,7 @@ class FlutterSunyardI80Plugin: FlutterPlugin {
   /** Method channel string of [printerChannel] */
   private val printerChannelName: String = "printer"
 
-  override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
+  override fun onAttachedToEngine(flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
     val isDeviceAvailable = System.getProperty("http.agent").contains("i80")
     if (isDeviceAvailable) {
       DeviceMaster.getInstance().init(flutterPluginBinding.applicationContext)
@@ -24,7 +23,7 @@ class FlutterSunyardI80Plugin: FlutterPlugin {
     }
   }
 
-  override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
+  override fun onDetachedFromEngine(binding: FlutterPlugin.FlutterPluginBinding) {
     printerChannel.setMethodCallHandler(null)
   }
 }
