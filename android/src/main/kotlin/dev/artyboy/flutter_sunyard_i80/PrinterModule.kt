@@ -10,55 +10,49 @@ import com.socsi.smartposapi.printer.Printer2
 import com.socsi.smartposapi.printer.TextEntity
 
 /** A module to utilize printer functionality. */
-class PrinterModule {
+class PrinterModule(context: Context) {
     /** An instance of [Printer2] */
-    private lateinit var printerInstance: Printer2
+    private var printerInstance: Printer2
 
     /** Method string of [isPrinterAvailable]. */
-    public val isPrinterAvailableMethodString: String = "isPrinterAvailable"
+    val isPrinterAvailableMethodString = "isPrinterAvailable"
 
     /** Method string of [appendText] */
-    public val appendTextMethodString: String = "appendText"
+    val appendTextMethodString = "appendText"
 
     /** Method string of [appendImage] */
-    public val appendImageMethodString: String = "appendImage"
+    val appendImageMethodString = "appendImage"
 
     /** Method string of [appendBarCode] */
-    public val appendBarCodeMethodString: String = "appendBarCode"
+    val appendBarCodeMethodString = "appendBarCode"
 
     /** Method string of [appendQrCode] */
-    public val appendQrCodeMethodString: String = "appendQrCode"
+    val appendQrCodeMethodString = "appendQrCode"
 
     /** Method string of [appendPaperFeed] */
-    public val appendPaperFeedMethodString: String = "appendPaperFeed"
+    val appendPaperFeedMethodString = "appendPaperFeed"
 
     /** Method string of [appendSeparatorLine] */
-    public val appendSeparatorLineMethodString: String = "appendSeparatorLine"
+    val appendSeparatorLineMethodString = "appendSeparatorLine"
 
     /** Method string of [startPrint] */
-    public val startPrintMethodString: String = "startPrint"
+    val startPrintMethodString = "startPrint"
 
     /** Method string of [clearPrintBuffer] */
-    public val clearPrintBufferMethodString: String = "clearPrintBuffer"
+    val clearPrintBufferMethodString = "clearPrintBuffer"
 
-    constructor(context: Context) {
+    init {
         printerInstance = Printer2.getInstance(context)
     }
 
     /** Whether printer is available or not. */
     fun isPrinterAvailable(): Boolean {
-        var isAvailable = false
-        try {
-            isAvailable = printerInstance.havePrinter()
-        } catch (e: SDKException) {
-            e.printStackTrace()
-        }
-        return isAvailable
+        return printerInstance.havePrinter()
     }
 
     /** Append text entity to print buffer. */
     fun appendText(text: String, isBold: Boolean, isLineBreak: Boolean, align: Align, fontSize: FontLattice): Int {
-        val textEntity: TextEntity = TextEntity()
+        val textEntity = TextEntity()
         textEntity.text = text
         textEntity.fontsize = fontSize
         textEntity.align = align

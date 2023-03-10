@@ -1,5 +1,6 @@
 package dev.artyboy.flutter_sunyard_i80
 
+import com.socsi.exception.SDKException
 import com.socsi.smartposapi.printer.Align
 import com.socsi.smartposapi.printer.FontLattice
 import io.flutter.plugin.common.MethodCall
@@ -10,13 +11,19 @@ class PrinterMethodCallHandler: MethodCallHandler {
     /** An instance of [PrinterModule] */
     private lateinit var printerModule: PrinterModule
 
-    constructor(printerModule: PrinterModule) {
+    init {
         this.printerModule = printerModule
     }
 
     override fun onMethodCall(call: MethodCall, result: MethodChannel.Result) {
         when (call.method) {
-            printerModule.isPrinterAvailableMethodString -> result.success(printerModule.isPrinterAvailable())
+            printerModule.isPrinterAvailableMethodString -> {
+                try {
+                    result.success(printerModule.isPrinterAvailable())
+                } catch (e: SDKException) {
+                    result.error(e.errCode, e.message, null)
+                }
+            }
             printerModule.appendTextMethodString -> {
                 val text = call.argument<String>("text")
                 val isBoldFont = call.argument<Boolean>("isBoldFont")
