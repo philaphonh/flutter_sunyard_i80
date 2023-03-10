@@ -1,7 +1,7 @@
 import 'package:flutter/services.dart';
-import 'package:flutter_sunyard_i80/src/printer_font_size.dart';
 
 import 'printer_align.dart';
+import 'printer_font_size.dart';
 import 'printer_paper_feed.dart';
 import 'printing_resp_code.dart';
 import 'utils.dart';
@@ -32,13 +32,21 @@ class Printer {
 
   /// Whether the printer is available or not.
   static Future<bool> isPrinterAvailable() async {
-    final isTrue =
-        await _methodChannel.invokeMethod(_isPrinterAvailableMethodString);
-    if (isTrue) {
-      return true;
-    }
+    try {
+      final isTrue =
+          await _methodChannel.invokeMethod(_isPrinterAvailableMethodString);
+      if (isTrue) {
+        return true;
+      }
 
-    return false;
+      return false;
+    } catch (e) {
+      if (e is MissingPluginException) {
+        return false;
+      }
+
+      rethrow;
+    }
   }
 
   /// Appends [text] data to print buffer.
@@ -66,9 +74,11 @@ class Printer {
       }
 
       return false;
-    } on PlatformException {
-      return false;
     } catch (e) {
+      if (e is MissingPluginException) {
+        return false;
+      }
+
       rethrow;
     }
   }
@@ -98,9 +108,11 @@ class Printer {
       }
 
       return false;
-    } on PlatformException {
-      return false;
     } catch (e) {
+      if (e is MissingPluginException) {
+        return false;
+      }
+
       rethrow;
     }
   }
@@ -128,9 +140,11 @@ class Printer {
       }
 
       return false;
-    } on PlatformException {
-      return false;
     } catch (e) {
+      if (e is MissingPluginException) {
+        return false;
+      }
+
       rethrow;
     }
   }
@@ -156,9 +170,11 @@ class Printer {
       }
 
       return false;
-    } on PlatformException {
-      return false;
     } catch (e) {
+      if (e is MissingPluginException) {
+        return false;
+      }
+
       rethrow;
     }
   }
@@ -186,6 +202,10 @@ class Printer {
 
       return getPrintRespCode(result);
     } catch (e) {
+      if (e is MissingPluginException) {
+        return PrintingResponseCode.printUnknown;
+      }
+
       rethrow;
     }
   }
@@ -201,14 +221,27 @@ class Printer {
       }
 
       return false;
-    } on PlatformException {
-      return false;
+    } catch (e) {
+      // Suppose the device is not available
+      if (e is MissingPluginException) {
+        return false;
+      }
+
+      rethrow;
     }
   }
 
   /// Clears current print buffer.
   static Future<void> clearPrintBuffer() async {
-    await _methodChannel.invokeMethod(_clearPrintBufferMethodString);
+    try {
+      await _methodChannel.invokeMethod(_clearPrintBufferMethodString);
+    } catch (e) {
+      if (e is MissingPluginException) {
+        return;
+      }
+
+      rethrow;
+    }
   }
 
   /// Starts printing operation and return [PrintingResponseCode].
@@ -219,6 +252,10 @@ class Printer {
 
       return getPrintRespCode(result);
     } catch (e) {
+      if (e is MissingPluginException) {
+        return PrintingResponseCode.printUnknown;
+      }
+
       rethrow;
     }
   }
