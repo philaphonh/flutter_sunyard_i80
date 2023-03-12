@@ -200,7 +200,7 @@ class Printer {
         "type": type,
       });
 
-      return getPrintRespCode(result);
+      return result.toPrintingResponseCode();
     } catch (e) {
       if (e is MissingPluginException) {
         return PrintingResponseCode.printUnknown;
@@ -250,7 +250,7 @@ class Printer {
       final result =
           await _methodChannel.invokeMethod<String>(_startPrintMethodString);
 
-      return getPrintRespCode(result);
+      return result.toPrintingResponseCode();
     } catch (e) {
       if (e is MissingPluginException) {
         return PrintingResponseCode.printUnknown;
