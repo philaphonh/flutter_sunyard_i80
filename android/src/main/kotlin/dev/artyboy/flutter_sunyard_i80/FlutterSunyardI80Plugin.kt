@@ -19,7 +19,7 @@ class FlutterSunyardI80Plugin: FlutterPlugin {
       DeviceMaster.getInstance().init(flutterPluginBinding.applicationContext)
 
       printerChannel = MethodChannel(flutterPluginBinding.binaryMessenger, printerChannelName)
-      printerChannel.setMethodCallHandler(PrinterMethodCallHandler(PrinterModule(flutterPluginBinding.applicationContext)))
+      printerChannel.setMethodCallHandler(PrinterMethodCallHandler(PrinterModule()))
     }
   }
 

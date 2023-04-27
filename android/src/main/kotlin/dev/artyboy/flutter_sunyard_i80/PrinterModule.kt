@@ -10,9 +10,12 @@ import com.socsi.smartposapi.printer.Printer2
 import com.socsi.smartposapi.printer.TextEntity
 
 /** A module to utilize printer functionality. */
-class PrinterModule(context: Context) {
-    /** An instance of [Printer2] */
-    private var printerInstance: Printer2
+class PrinterModule {
+    /** An instance of [Printer2].
+     * Since getting an instance with context will cause SharedPreferences issue,
+     * I have to get an instance from deprecated method instead.
+     * */
+    private var printerInstance: Printer2 = Printer2.getInstance()
 
     /** Method string of [isPrinterAvailable]. */
     val isPrinterAvailableMethodString = "isPrinterAvailable"
@@ -40,10 +43,6 @@ class PrinterModule(context: Context) {
 
     /** Method string of [clearPrintBuffer] */
     val clearPrintBufferMethodString = "clearPrintBuffer"
-
-    init {
-        printerInstance = Printer2.getInstance(context)
-    }
 
     /** Whether printer is available or not. */
     fun isPrinterAvailable(): Boolean {
