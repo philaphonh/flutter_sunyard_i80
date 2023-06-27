@@ -6,3 +6,4 @@ export 'src/printer_paper_feed.dart';
 export 'src/printer_font_size.dart';
 export 'src/printing_resp_code.dart';
 export 'src/printer.dart';
+export 'src/terminal_info.dart';
