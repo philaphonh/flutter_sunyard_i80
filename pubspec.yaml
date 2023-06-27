@@ -1,7 +1,7 @@
-name: flutter_sunyard_i80
+name: sunyard_i80
 description: A Flutter plugin that supports Sunyard i80
 version: 0.0.1
-homepage:
+homepage: https://github.com/mrarty55/flutter_sunyard_i80
 
 environment:
   sdk: '>=2.19.2 <3.0.0'
