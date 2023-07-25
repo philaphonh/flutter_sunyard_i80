@@ -8,9 +8,9 @@ import io.flutter.plugin.common.MethodChannel
 /** FlutterSunyardI80Plugin */
 class FlutterSunyardI80Plugin: FlutterPlugin {
   /** Method channel for [PrinterModule] */
-  private lateinit var printerChannel: MethodChannel
+  private var printerChannel: MethodChannel? = null
 
-  private lateinit var terminalInfoChannel: MethodChannel
+  private var terminalInfoChannel: MethodChannel? = null
 
   /** Method channel string of [printerChannel] */
   private val printerChannelName: String = "printer"
@@ -23,14 +23,15 @@ class FlutterSunyardI80Plugin: FlutterPlugin {
       DeviceMaster.getInstance().init(flutterPluginBinding.applicationContext)
 
       printerChannel = MethodChannel(flutterPluginBinding.binaryMessenger, printerChannelName)
-      printerChannel.setMethodCallHandler(PrinterMethodCallHandler(PrinterModule()))
+      printerChannel?.setMethodCallHandler(PrinterMethodCallHandler(PrinterModule()))
 
       terminalInfoChannel = MethodChannel(flutterPluginBinding.binaryMessenger, terminalInfoChannelName)
-      terminalInfoChannel.setMethodCallHandler(TerminalInfoMethodCallHandler(TerminalInfoModule()))
+      terminalInfoChannel?.setMethodCallHandler(TerminalInfoMethodCallHandler(TerminalInfoModule()))
     }
   }
 
   override fun onDetachedFromEngine(binding: FlutterPlugin.FlutterPluginBinding) {
-    printerChannel.setMethodCallHandler(null)
+    printerChannel?.setMethodCallHandler(null)
+    terminalInfoChannel?.setMethodCallHandler(null)
   }
 }
