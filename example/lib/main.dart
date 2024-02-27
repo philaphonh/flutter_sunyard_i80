@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:sunyard_i80/sunyard_i80.dart';
+import 'package:flutter_sunyard_i80/flutter_sunyard_i80.dart';
 
 void main() {
   runApp(const MyApp());
