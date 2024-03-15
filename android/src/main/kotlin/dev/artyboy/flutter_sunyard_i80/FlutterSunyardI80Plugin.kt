@@ -12,13 +12,23 @@ class FlutterSunyardI80Plugin: FlutterPlugin {
 
   private var terminalInfoChannel: MethodChannel? = null
 
+  /** Method channel for [DeviceModule] */
+  private var deviceChannel: MethodChannel? = null
+
   /** Method channel string of [printerChannel] */
   private val printerChannelName: String = "printer"
 
   private val terminalInfoChannelName: String = "terminal_info"
 
+  /** Method channel string of [deviceChannel] */
+  private val deviceChannelName: String = "device"
+
   override fun onAttachedToEngine(flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
-    val isDeviceAvailable = System.getProperty("http.agent").contains("i80")
+    val deviceModule = DeviceModule()
+    deviceChannel = MethodChannel(flutterPluginBinding.binaryMessenger, deviceChannelName)
+    deviceChannel?.setMethodCallHandler(DeviceMethodCallHandler(deviceModule))
+
+    val isDeviceAvailable = deviceModule.isAvailable()
     if (isDeviceAvailable) {
       DeviceMaster.getInstance().init(flutterPluginBinding.applicationContext)
 
