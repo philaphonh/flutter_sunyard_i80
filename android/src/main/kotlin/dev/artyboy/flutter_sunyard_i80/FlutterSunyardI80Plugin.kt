@@ -10,6 +10,7 @@ class FlutterSunyardI80Plugin: FlutterPlugin {
   /** Method channel for [PrinterModule] */
   private var printerChannel: MethodChannel? = null
 
+  /** Method channel for [TerminalInfoModule] */
   private var terminalInfoChannel: MethodChannel? = null
 
   /** Method channel for [DeviceModule] */
@@ -18,6 +19,7 @@ class FlutterSunyardI80Plugin: FlutterPlugin {
   /** Method channel string of [printerChannel] */
   private val printerChannelName: String = "printer"
 
+  /** Method channel string of [terminalInfoChannel] */
   private val terminalInfoChannelName: String = "terminal_info"
 
   /** Method channel string of [deviceChannel] */
