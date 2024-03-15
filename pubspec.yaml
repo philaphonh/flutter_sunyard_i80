@@ -1,6 +1,6 @@
 name: flutter_sunyard_i80
 description: A Flutter plugin that helps you utilize functionalities on Sunyard i80 EDC POS terminal
-version: 0.0.1
+version: 1.0.0
 homepage: https://github.com/philaphonh/flutter_sunyard_i80
 
 environment:
