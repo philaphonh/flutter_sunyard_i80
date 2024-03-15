@@ -59,7 +59,7 @@ class _MyAppState extends State<MyApp> {
                 child: Text('Device status: ${deviceStatus()}'),
               ),
               Center(
-                child: Text('Printer Serial Number: $serialNumber'),
+                child: Text('Device Serial Number: $serialNumber'),
               ),
               Center(
                 child: Text('Printer status: ${printerStatus()}'),
