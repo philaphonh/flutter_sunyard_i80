@@ -17,6 +17,8 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   bool isPrinterAvailable = false;
 
+  bool isDeviceAvailable = false;
+
   String serialNumber = "";
 
   @override
@@ -26,11 +28,17 @@ class _MyAppState extends State<MyApp> {
   }
 
   void initPage() async {
-    final isTrue = await Printer.isPrinterAvailable();
+    final isDeviceAvailable = await Device.isAvailable();
+    final isPrinterAvailable = await Printer.isPrinterAvailable();
     serialNumber = await TerminalInfo.serialNumber;
-    if (isTrue) {
+    if (isDeviceAvailable) {
       setState(() {
-        isPrinterAvailable = isTrue;
+        this.isDeviceAvailable = isDeviceAvailable;
+      });
+    }
+    if (isPrinterAvailable) {
+      setState(() {
+        this.isPrinterAvailable = isPrinterAvailable;
       });
     }
   }
@@ -47,6 +55,9 @@ class _MyAppState extends State<MyApp> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Center(
+                child: Text('Device status: ${deviceStatus()}'),
+              ),
               Center(
                 child: Text('Printer Serial Number: $serialNumber'),
               ),
@@ -98,6 +109,10 @@ class _MyAppState extends State<MyApp> {
         ),
       ),
     );
+  }
+
+  String deviceStatus() {
+    return isDeviceAvailable ? "Available" : "Unavailable";
   }
 
   String printerStatus() {
