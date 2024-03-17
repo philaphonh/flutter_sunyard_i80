@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:flutter_sunyard_i80/flutter_sunyard_i80.dart';
+import 'package:flutter_sunyard_i80/flutter_sunyard_i80.dart' as i80;
 
 void main() {
   runApp(const MyApp());
@@ -28,9 +28,9 @@ class _MyAppState extends State<MyApp> {
   }
 
   void initPage() async {
-    final isDeviceAvailable = await Device.isAvailable();
-    final isPrinterAvailable = await Printer.isPrinterAvailable();
-    serialNumber = await TerminalInfo.serialNumber;
+    final isDeviceAvailable = await i80.Device.isAvailable();
+    final isPrinterAvailable = await i80.Printer.isPrinterAvailable();
+    serialNumber = await i80.TerminalInfo.serialNumber;
     if (isDeviceAvailable) {
       setState(() {
         this.isDeviceAvailable = isDeviceAvailable;
@@ -121,29 +121,29 @@ class _MyAppState extends State<MyApp> {
 
   void printText() async {
     try {
-      await Printer.appendText(
+      await i80.Printer.appendText(
         text: "Flutter",
-        textAlign: PrinterAlign.left,
+        textAlign: i80.PrinterAlign.left,
       );
 
-      await Printer.appendText(
+      await i80.Printer.appendText(
         text: "Flutter",
-        textAlign: PrinterAlign.right,
+        textAlign: i80.PrinterAlign.right,
       );
 
-      await Printer.appendText(
+      await i80.Printer.appendText(
         text: "Flutter",
-        textAlign: PrinterAlign.left,
+        textAlign: i80.PrinterAlign.left,
         isBoldFont: true,
       );
-      await Printer.appendText(
+      await i80.Printer.appendText(
         text: "Flutter",
-        textAlign: PrinterAlign.right,
+        textAlign: i80.PrinterAlign.right,
         isLineBreak: false,
-        fontSize: PrinterFontSize.thirtySix,
+        fontSize: i80.PrinterFontSize.thirtySix,
       );
 
-      await Printer.startPrint();
+      await i80.Printer.startPrint();
     } catch (e) {
       rethrow;
     }
@@ -155,33 +155,33 @@ class _MyAppState extends State<MyApp> {
 
     final bytes = Uint8List.view(assetImage.buffer);
 
-    await Printer.appendImage(
+    await i80.Printer.appendImage(
       byteArray: bytes,
-      align: PrinterAlign.right,
+      align: i80.PrinterAlign.right,
     );
 
-    await Printer.appendImage(
+    await i80.Printer.appendImage(
       byteArray: bytes,
-      align: PrinterAlign.left,
+      align: i80.PrinterAlign.left,
       sampleSize: 2,
     );
 
-    await Printer.startPrint();
+    await i80.Printer.startPrint();
   }
 
   void printBarcode() async {
-    await Printer.appendBarCode(data: "1234567890");
+    await i80.Printer.appendBarCode(data: "1234567890");
 
-    await Printer.startPrint();
+    await i80.Printer.startPrint();
   }
 
   void printQr() async {
-    await Printer.appendQrCode(
+    await i80.Printer.appendQrCode(
       data: "https://artyboy.dev",
       width: 100,
       height: 100,
     );
 
-    await Printer.startPrint();
+    await i80.Printer.startPrint();
   }
 }
