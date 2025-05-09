@@ -1,4 +1,4 @@
-package dev.artyboy.flutter_sunyard_i80
+package com.philaphonh.flutter_sunyard_i80
 
 /** A module for device status */
 class DeviceModule {

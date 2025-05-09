@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="dev.artyboy.flutter_sunyard_i80_example">
+    package="com.philaphonh.flutter_sunyard_i80_example">
    <application
         android:label="flutter_sunyard_i80_example"
         android:name="${applicationName}"

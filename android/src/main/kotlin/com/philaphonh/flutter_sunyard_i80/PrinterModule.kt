@@ -1,4 +1,4 @@
-package dev.artyboy.flutter_sunyard_i80
+package com.philaphonh.flutter_sunyard_i80
 
 import android.content.Context
 import android.graphics.Bitmap
