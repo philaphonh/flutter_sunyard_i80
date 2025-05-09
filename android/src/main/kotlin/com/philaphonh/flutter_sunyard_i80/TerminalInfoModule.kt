@@ -1,4 +1,4 @@
-package dev.artyboy.flutter_sunyard_i80
+package com.philaphonh.flutter_sunyard_i80
 
 import com.socsi.smartposapi.terminal.TerminalManager
 
