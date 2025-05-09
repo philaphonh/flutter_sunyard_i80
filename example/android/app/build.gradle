@@ -24,6 +24,7 @@ if (flutterVersionName == null) {
 }
 
 android {
+    namespace "dev.artyboy.flutter_sunyard_i80_example"
     compileSdkVersion flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
 
