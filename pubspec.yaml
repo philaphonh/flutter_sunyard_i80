@@ -35,7 +35,7 @@ flutter:
   plugin:
     platforms:
       android:
-        package: dev.artyboy.flutter_sunyard_i80
+        package: com.philaphonh.flutter_sunyard_i80
         pluginClass: FlutterSunyardI80Plugin
 
   # To add assets to your plugin package, add an assets section, like this:
